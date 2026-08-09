@@ -1,0 +1,99 @@
+@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg: #08090c;
+  --bg-soft: #0d0f14;
+  --bg-card: #12141b;
+  --border: #1e222c;
+  --ink: #e9edf3;
+  --ink-dim: #8891a3;
+  --ink-faint: #525a6b;
+  --glass-bg: rgba(18, 20, 27, 0.55);
+  --glass-border: rgba(255, 255, 255, 0.06);
+  --grid-line: rgba(62, 230, 224, 0.055);
+  --scrollbar-track: #0d0f14;
+  color-scheme: dark;
+}
+
+html.light {
+  --bg: #ffffff;
+  --bg-soft: #f4f6f9;
+  --bg-card: #ffffff;
+  --border: #e3e7ee;
+  --ink: #12141b;
+  --ink-dim: #4d5566;
+  --ink-faint: #8b93a3;
+  --glass-bg: rgba(255, 255, 255, 0.6);
+  --glass-border: rgba(18, 20, 27, 0.08);
+  --grid-line: rgba(13, 143, 142, 0.07);
+  --scrollbar-track: #eef1f5;
+  color-scheme: light;
+}
+
+* {
+  scroll-behavior: smooth;
+}
+
+html,
+body {
+  background-color: var(--bg);
+  color: var(--ink);
+  transition: background-color 0.4s ease, color 0.4s ease;
+}
+
+body {
+  font-family: "Inter", sans-serif;
+  overflow-x: hidden;
+}
+
+::selection {
+  background: rgba(62, 230, 224, 0.25);
+  color: #ffffff;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--scrollbar-track);
+}
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(#22d3d1, #8b5cf6);
+  border-radius: 8px;
+}
+
+@layer utilities {
+  .glass {
+    background: var(--glass-bg);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid var(--glass-border);
+    transition: background-color 0.4s ease, border-color 0.4s ease;
+  }
+  .text-gradient {
+    background: linear-gradient(90deg, #3ee6e0, #a78bfa);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .grid-bg {
+    background-image: linear-gradient(var(--grid-line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+    background-size: 44px 44px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
