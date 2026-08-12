@@ -63,8 +63,8 @@ export default function OrbitVisual() {
       <div className="absolute h-[220px] w-[220px] rounded-full border border-void-border/70 sm:h-[260px] sm:w-[260px]" />
       <div className="absolute h-[340px] w-[340px] rounded-full border border-void-border/50 sm:h-[400px] sm:w-[400px]" />
 
-      <OrbitRing items={inner} radius={95} duration={22} />
-      <OrbitRing items={outer} radius={175} duration={34} />
+     <OrbitRing items={inner} radius={95} duration={60} />
+<OrbitRing items={outer} radius={175} duration={90} />
 
       {/* central status card */}
       <motion.div
