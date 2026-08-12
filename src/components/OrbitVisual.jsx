@@ -20,12 +20,16 @@ function OrbitRing({ items, radius, duration, size = 480 }) {
   const positions = ringPositions(items.length, radius, items === inner ? -45 : -90);
 
   return (
-    <motion.div
-      className="absolute inset-0"
-      style={{ width: size, height: size }}
-      animate={{ rotate: 360 }}
-      transition={{ duration, repeat: Infinity, ease: "linear" }}
-    >
+   <motion.div
+  className="absolute inset-0"
+  style={{ width: size, height: size }}
+  animate={
+    typeof window !== "undefined" && window.innerWidth <= 767
+      ? {}
+      : { rotate: 360 }
+  }
+  transition={{ duration, repeat: Infinity, ease: "linear" }}
+>
       {items.map((tech, i) => (
         <motion.div
           key={tech.name}
@@ -35,11 +39,15 @@ function OrbitRing({ items, radius, duration, size = 480 }) {
           }}
         >
           {/* counter-rotate so the icon stays upright while the ring spins */}
-          <motion.div
-            animate={{ rotate: -360 }}
-            transition={{ duration, repeat: Infinity, ease: "linear" }}
-            className="group relative -translate-x-1/2 -translate-y-1/2"
-          >
+         <motion.div
+  animate={
+    typeof window !== "undefined" && window.innerWidth <= 767
+      ? {}
+      : { rotate: -360 }
+  }
+  transition={{ duration, repeat: Infinity, ease: "linear" }}
+  className="group relative -translate-x-1/2 -translate-y-1/2"
+>
             <div
               className="glass flex h-11 w-11 items-center justify-center rounded-xl shadow-lg transition-transform duration-300 hover:scale-110 sm:h-12 sm:w-12"
               style={{ boxShadow: `0 0 22px -6px ${tech.color}55` }}
