@@ -67,13 +67,13 @@ body {
 }
 
 @layer utilities {
-  .glass {
-    background: var(--glass-bg);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    border: 1px solid var(--glass-border);
-    transition: background-color 0.4s ease, border-color 0.4s ease;
-  }
+.glass {
+  background: var(--glass-bg);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid var(--glass-border);
+  transition: background-color 0.4s ease, border-color 0.4s ease;
+}
   .text-gradient {
     background: linear-gradient(90deg, #3ee6e0, #a78bfa);
     -webkit-background-clip: text;
