@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { ArrowUpRight, Folder } from "lucide-react";
 import Reveal from "./Reveal";
@@ -8,6 +8,21 @@ import { projects } from "../data/projects";
 function ProjectCard({ project, index }) {
   const ref = useRef(null);
   const [tilt, setTilt] = useState({ x: 0, y: 0 });
+  const [isMobile, setIsMobile] = useState(false);
+
+useEffect(() => {
+  const checkMobile = () => {
+    setIsMobile(window.innerWidth < 768);
+  };
+
+  checkMobile();
+
+  window.addEventListener("resize", checkMobile);
+
+  return () => {
+    window.removeEventListener("resize", checkMobile);
+  };
+}, []);
 
   const handleMove = (e) => {
     const rect = ref.current.getBoundingClientRect();
@@ -21,11 +36,11 @@ function ProjectCard({ project, index }) {
     <Reveal delay={(index % 2) * 0.1}>
       <motion.div
         ref={ref}
-        onMouseMove={handleMove}
-        onMouseLeave={() => setTilt({ x: 0, y: 0 })}
-        animate={{ rotateX: tilt.x, rotateY: tilt.y }}
-        transition={{ type: "spring", stiffness: 180, damping: 16 }}
-        style={{ transformStyle: "preserve-3d" }}
+        onMouseMove={!isMobile ? handleMove : undefined}
+onMouseLeave={!isMobile ? () => setTilt({ x: 0, y: 0 }) : undefined}
+      animate={!isMobile ? { rotateX: tilt.x, rotateY: tilt.y } : {}}
+transition={!isMobile ? { type: "spring", stiffness: 180, damping: 16 } : {}}
+style={!isMobile ? { transformStyle: "preserve-3d" } : {}}
         className="group relative overflow-hidden rounded-2xl border border-void-border bg-void-card [perspective:1000px] hover:border-transparent"
       >
         {/* Hover Border Effect */}
